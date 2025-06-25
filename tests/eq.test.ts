@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import * as assert from "node:assert/strict";
-import { Variable, eq } from "../src/main";
+import { Variable } from "../src/variable";
+import { eq } from "../src/utils";
 
 test("eq (bidirectional)", () => {
   const a = new Variable(10);

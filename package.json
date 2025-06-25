@@ -11,15 +11,15 @@
     "build": "tsc --project tsconfig.build.json",
     "clean": "rm -rf dist",
     "prepare": "yarn build",
-    "dev": "node --import ./ts-node-register.js src/main.ts",
+    "dev": "node --import ./ts-node-register.js src/index.ts",
     "test": "node --import ./ts-node-register.js --experimental-specifier-resolution=node -r tsconfig-paths/register --test **/*.test.ts"
   },
-  "main": "dist/main.js",
-  "types": "dist/main.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/main.js",
-      "types": "./dist/main.d.ts"
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "devDependencies": {
