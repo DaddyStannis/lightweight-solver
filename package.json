@@ -10,7 +10,9 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "clean": "rm -rf dist",
-    "prepare": "yarn build"
+    "prepare": "yarn build",
+    "dev": "node --import ./ts-node-register.js src/main.ts",
+    "test": "node --import ./ts-node-register.js --experimental-specifier-resolution=node -r tsconfig-paths/register --test **/*.test.ts"
   },
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
@@ -21,7 +23,10 @@
     }
   },
   "devDependencies": {
-    "typescript": "~5.8.3",
+    "@types/node": "^24.0.4",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.8.3",
     "vite": "^7.0.0"
   }
 }
