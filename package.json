@@ -11,8 +11,8 @@
     "build": "tsc --project tsconfig.build.json",
     "clean": "rm -rf dist",
     "prepare": "yarn build",
-    "dev": "node --import ./ts-node-register.js src/index.ts",
-    "test": "node --import ./ts-node-register.js --experimental-specifier-resolution=node -r tsconfig-paths/register --test **/*.test.ts"
+    "dev": "node --import ./ts-node-register.js --experimental-specifier-resolution=node ./src/index.ts",
+    "test": "node --import ./ts-node-register.js --experimental-specifier-resolution=node **/*.test.ts"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -24,9 +24,14 @@
   },
   "devDependencies": {
     "@types/node": "^24.0.4",
+    "prettier": "3.6.1",
     "ts-node": "^10.9.2",
+    "ts-node-esm": "^0.0.6",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.3",
     "vite": "^7.0.0"
+  },
+  "dependencies": {
+    "@lume/kiwi": "^0.4.4"
   }
 }
