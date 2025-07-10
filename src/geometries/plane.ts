@@ -58,12 +58,12 @@ export class Plane extends Geometry {
 
   getBounds(): Bounds {
     return {
-      bottom: this.position['_y'].value() + this._height.value() / 2,
-      top: this.position['_y'].value() - this._height.value() / 2,
-      right: this.position['_x'].value() + this._width.value() / 2,
-      left: this.position['_x'].value() - this._width.value() / 2,
-      front: this.position['_z'].value() + this._depth.value() / 2,
-      back: this.position['_z'].value() - this._depth.value() / 2,
+      bottom: this.position.y + this._height.value() / 2,
+      top: this.position.y - this._height.value() / 2,
+      right: this.position.x + this._width.value() / 2,
+      left: this.position.x - this._width.value() / 2,
+      front: this.position.z + this._depth.value() / 2,
+      back: this.position.z - this._depth.value() / 2,
     };
   }
 }
