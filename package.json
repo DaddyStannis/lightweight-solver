@@ -1,6 +1,6 @@
 {
   "name": "kiwi-geometry",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A lightweight constraint solver for 2D/3D geometries",
   "private": false,
   "license": "MIT",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/DaddyStannis/lightweight-solver"
+    "url": "https://github.com/DaddyStannis/kiwi-geometry"
   },
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.0.12",
+    "dtslint": "^4.2.1",
     "prettier": "3.6.1",
     "ts-node": "^10.9.2",
     "ts-node-esm": "^0.0.6",
