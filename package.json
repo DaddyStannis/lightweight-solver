@@ -1,5 +1,5 @@
 {
-  "name": "lightweight-solver",
+  "name": "kiwi-geometry",
   "version": "1.0.0",
   "description": "A lightweight constraint solver for 2D/3D geometries",
   "private": false,
