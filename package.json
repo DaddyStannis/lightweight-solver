@@ -12,7 +12,7 @@
     "clean": "rm -rf dist",
     "prepare": "yarn build",
     "dev": "node --import ./ts-node-register.js --experimental-specifier-resolution=node ./src/index.ts",
-    "test": "node --import ./ts-node-register.js --experimental-specifier-resolution=node **/*.test.ts"
+    "test": "NODE_OPTIONS='--import=tsx' find tests -name \"*.test.ts\" -exec node --test {} +"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,11 +23,12 @@
     }
   },
   "devDependencies": {
-    "@types/node": "^24.0.4",
+    "@types/node": "^24.0.12",
     "prettier": "3.6.1",
     "ts-node": "^10.9.2",
     "ts-node-esm": "^0.0.6",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.20.3",
     "typescript": "^5.8.3",
     "vite": "^7.0.0"
   },

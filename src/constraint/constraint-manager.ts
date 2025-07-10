@@ -1,5 +1,5 @@
 import type { Constraint, Solver } from '@lume/kiwi';
-import type { Geometry } from 'src/geometries/geometry.ts';
+import type { Geometry } from 'src/geometry/geometry.ts';
 
 export class ConstraintManager {
   private static _constraintsMap = new WeakMap<Geometry, Constraint[]>();

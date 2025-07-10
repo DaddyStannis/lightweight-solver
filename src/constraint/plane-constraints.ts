@@ -1,6 +1,6 @@
 import { Constraint, Operator, Strength } from '@lume/kiwi';
-import { GeometryConstraints } from 'src/constraints/geometry-constraints';
-import { Plane } from 'src/geometries/plane';
+import { GeometryConstraints } from 'src/constraint/geometry-constraints';
+import { Plane } from 'src/geometry/plane';
 
 export class PlaneConstraints extends GeometryConstraints {
   private readonly _plane: Plane;

@@ -1,6 +1,6 @@
 import type { Constraint, Solver } from '@lume/kiwi';
-import { ConstraintFactory } from 'src/constraints/constraint-factory';
-import { ConstraintManager } from 'src/constraints/constraint-manager';
+import { ConstraintFactory } from 'src/constraint/constraint-factory';
+import { ConstraintManager } from 'src/constraint/constraint-manager';
 import type { Bounds, Point } from 'src/share/types';
 import { Vector3 } from 'src/share/vector';
 

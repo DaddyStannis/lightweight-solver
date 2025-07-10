@@ -1,7 +1,7 @@
 import { Constraint, Operator, Strength } from '@lume/kiwi';
-import { type Geometry } from 'src/geometries/geometry';
-import { GeometryConstraints } from 'src/constraints/geometry-constraints';
-import { Plane } from 'src/geometries/plane';
+import { type Geometry } from 'src/geometry/geometry';
+import { GeometryConstraints } from 'src/constraint/geometry-constraints';
+import { Plane } from 'src/geometry/plane';
 
 export class PlaneToPlaneConstraints extends GeometryConstraints {
   private readonly _plane: Plane;
@@ -93,9 +93,9 @@ export class PlaneToPlaneConstraints extends GeometryConstraints {
     }
 
     const constraint = new Constraint(
-      this._plane.position['_y'].minus(this._plane['_height'].divide(2)),
+      this._plane.position['_y'].minus(this._plane['_height'].divide(2)), // Верхній край поточного об'єкта
       Operator.Eq,
-      target.position['_y'].minus(target['_height'].divide(2)),
+      target.position['_y'].minus(target['_height'].divide(2)), // Верхній край цільового об'єкта
       Strength.strong
     );
 

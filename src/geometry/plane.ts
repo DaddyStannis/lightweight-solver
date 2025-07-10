@@ -1,6 +1,6 @@
 import { type Solver, Strength, Variable } from '@lume/kiwi';
 import type { Bounds, Point } from 'src/share/types';
-import { Geometry } from 'src/geometries/geometry';
+import { Geometry } from 'src/geometry/geometry';
 
 export type PlaneOptions = {
   width?: number;

@@ -1,8 +1,8 @@
-import type { Geometry } from 'src/geometries/geometry';
-import type { GeometryConstraints } from 'src/constraints/geometry-constraints';
-import { PlaneConstraints } from 'src/constraints/plane-constraints';
-import { PlaneToPlaneConstraints } from 'src/constraints/plane-to-plane-constraints';
-import { Plane } from 'src/geometries/plane';
+import type { Geometry } from 'src/geometry/geometry';
+import type { GeometryConstraints } from 'src/constraint/geometry-constraints';
+import { PlaneConstraints } from 'src/constraint/plane-constraints';
+import { PlaneToPlaneConstraints } from 'src/constraint/plane-to-plane-constraints';
+import { Plane } from 'src/geometry/plane';
 
 export class ConstraintFactory {
   static getConstraints(a: Geometry, b?: Geometry): GeometryConstraints {

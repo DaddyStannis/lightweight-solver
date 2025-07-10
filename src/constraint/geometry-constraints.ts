@@ -1,4 +1,4 @@
-import { type Geometry } from 'src/geometries/geometry';
+import { type Geometry } from 'src/geometry/geometry';
 
 export abstract class GeometryConstraints {
   setRightOf(target: Geometry): void {

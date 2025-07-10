@@ -1,4 +1,4 @@
-import { type Solver, Variable } from '@lume/kiwi';
+import { type Solver, Variable, Strength } from '@lume/kiwi';
 import type { Point } from 'src/share/types.ts';
 
 export class Vector3 {
@@ -9,13 +9,17 @@ export class Vector3 {
 
   constructor(solver: Solver) {
     this._solver = solver;
+    this._solver.addEditVariable(this._x, Strength.weak);
+    this._solver.addEditVariable(this._y, Strength.weak);
+    this._solver.addEditVariable(this._z, Strength.weak);
+    this.set({ x: 0, y: 0, z: 0 });
   }
 
   set x(val: number) {
     this._solver.suggestValue(this._x, val);
   }
 
-  get x() {
+  get x(): number {
     return this._x.value();
   }
 
@@ -23,7 +27,7 @@ export class Vector3 {
     this._solver.suggestValue(this._y, val);
   }
 
-  get y() {
+  get y(): number {
     return this._y.value();
   }
 
@@ -31,8 +35,14 @@ export class Vector3 {
     this._solver.suggestValue(this._z, val);
   }
 
-  get z() {
+  get z(): number {
     return this._z.value();
+  }
+
+  set(point: Point): void {
+    this.x = point.x;
+    this.y = point.y;
+    this.z = point.z;
   }
 
   get(): Point {
