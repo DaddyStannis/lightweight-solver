@@ -178,7 +178,7 @@ export class PlaneToPlaneConstraints extends GeometryConstraints {
       target['_height'],
       Strength.strong
     );
-
+    
     this._plane.addTrackedConstraint(constraint);
     target.addTrackedConstraint(constraint);
   }

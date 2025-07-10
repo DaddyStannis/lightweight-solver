@@ -6,6 +6,7 @@ export type PlaneOptions = {
   width?: number;
   height?: number;
   depth?: number;
+  strength?: number;
 };
 
 export class Plane extends Geometry {
@@ -13,17 +14,22 @@ export class Plane extends Geometry {
   private readonly _height: Variable;
   private readonly _depth: Variable;
 
-  constructor(solver: Solver, options?: PlaneOptions) {
+  constructor(
+    solver: Solver,
+    { strength = Strength.weak, ...options }: PlaneOptions = {}
+  ) {
     super(solver);
     this._width = new Variable('width');
     this._height = new Variable('height');
     this._depth = new Variable('depth');
-    this._solver.addEditVariable(this._width, Strength.weak);
+
+    this._solver.addEditVariable(this._width, strength);
+    this._solver.addEditVariable(this._height, strength);
+    this._solver.addEditVariable(this._depth, strength);
+
     this._solver.suggestValue(this._width, options?.width ?? 1);
-    this._solver.addEditVariable(this._height, Strength.weak);
     this._solver.suggestValue(this._height, options?.height ?? 1);
-    this._solver.addEditVariable(this._depth, Strength.weak);
-    this._solver.suggestValue(this._depth, options?.height ?? 1);
+    this._solver.suggestValue(this._depth, options?.depth ?? 1);
   }
 
   set width(val: number) {
