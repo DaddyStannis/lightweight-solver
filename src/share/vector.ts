@@ -1,5 +1,5 @@
 import { type Solver, Variable, Strength } from '@lume/kiwi';
-import type { Point } from 'src/share/types.ts';
+import type { Point } from 'src/share/types';
 
 export class Vector3 {
   private readonly _solver: Solver;

@@ -1,25 +1,16 @@
 {
   "name": "kiwi-geometry",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A lightweight constraint solver for 2D/3D geometries",
-  "private": false,
   "license": "MIT",
   "type": "module",
   "author": {
-    "email": "stanislav.sakun@ukr.net",
-    "name": "Stanislav Sakun"
+    "name": "Stanislav Sakun",
+    "email": "stanislav.sakun@ukr.net"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/DaddyStannis/kiwi-geometry"
-  },
-  "scripts": {
-    "build": "tsc --project tsconfig.build.json",
-    "prepublishOnly": "yarn build",
-    "clean": "rm -rf dist",
-    "prepare": "yarn build",
-    "dev": "NODE_OPTIONS='--import=tsx' node src/index.ts",
-    "test": "NODE_OPTIONS='--import=tsx' find tests -name \"*.test.ts\" -exec node --test {} +"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,6 +19,26 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "typesVersions": {
+    "*": {
+      "src/*": [
+        "dist/*"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "prepublishOnly": "yarn build",
+    "prepare": "yarn build",
+    "clean": "rm -rf dist",
+    "dev": "NODE_OPTIONS='--import=tsx' node src/index.ts",
+    "test": "NODE_OPTIONS='--import=tsx' find tests -name \"*.test.ts\" -exec node --test {} +"
   },
   "devDependencies": {
     "@types/node": "^24.0.12",
@@ -42,8 +53,5 @@
   },
   "dependencies": {
     "@lume/kiwi": "^0.4.4"
-  },
-  "imports": {
-    "#src/*": "./dist/*.js"
   }
 }
