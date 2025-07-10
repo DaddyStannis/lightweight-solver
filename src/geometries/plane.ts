@@ -9,61 +9,61 @@ export type PlaneOptions = {
 };
 
 export class Plane extends Geometry {
-  public readonly varWidth: Variable;
-  public readonly varHeight: Variable;
-  public readonly varDepth: Variable;
+  private readonly _width: Variable;
+  private readonly _height: Variable;
+  private readonly _depth: Variable;
 
   constructor(solver: Solver, options?: PlaneOptions) {
     super(solver);
-    this.varWidth = new Variable('width');
-    this.varHeight = new Variable('height');
-    this.varDepth = new Variable('depth');
-    this._solver.addEditVariable(this.varWidth, Strength.weak);
-    this._solver.suggestValue(this.varWidth, options?.width ?? 1);
-    this._solver.addEditVariable(this.varHeight, Strength.weak);
-    this._solver.suggestValue(this.varHeight, options?.height ?? 1);
-    this._solver.addEditVariable(this.varDepth, Strength.weak);
-    this._solver.suggestValue(this.varDepth, options?.height ?? 1);
+    this._width = new Variable('width');
+    this._height = new Variable('height');
+    this._depth = new Variable('depth');
+    this._solver.addEditVariable(this._width, Strength.weak);
+    this._solver.suggestValue(this._width, options?.width ?? 1);
+    this._solver.addEditVariable(this._height, Strength.weak);
+    this._solver.suggestValue(this._height, options?.height ?? 1);
+    this._solver.addEditVariable(this._depth, Strength.weak);
+    this._solver.suggestValue(this._depth, options?.height ?? 1);
   }
 
   set width(val: number) {
-    this._solver.suggestValue(this.varWidth, val);
+    this._solver.suggestValue(this._width, val);
   }
 
   get width() {
-    return this.varWidth.value();
+    return this._width.value();
   }
 
   set height(val: number) {
-    this._solver.suggestValue(this.varHeight, val);
+    this._solver.suggestValue(this._height, val);
   }
 
   get height() {
-    return this.varHeight.value();
+    return this._height.value();
   }
 
   set depth(val: number) {
-    this._solver.suggestValue(this.varDepth, val);
+    this._solver.suggestValue(this._depth, val);
   }
 
   get depth() {
-    return this.varDepth.value();
+    return this._depth.value();
   }
 
   drag(to: Point): void {
-    this._solver.suggestValue(this.position.varX, to.x);
-    this._solver.suggestValue(this.position.varY, to.y);
-    this._solver.suggestValue(this.position.varZ, to.z);
+    this._solver.suggestValue(this.position['_x'], to.x);
+    this._solver.suggestValue(this.position['_y'], to.y);
+    this._solver.suggestValue(this.position['_z'], to.z);
   }
 
   getBounds(): Bounds {
     return {
-      bottom: this.position.varY.value() + this.varHeight.value() / 2,
-      top: this.position.varY.value() - this.varHeight.value() / 2,
-      right: this.position.varX.value() + this.varWidth.value() / 2,
-      left: this.position.varX.value() - this.varWidth.value() / 2,
-      front: this.position.varZ.value() + this.varDepth.value() / 2,
-      back: this.position.varZ.value() - this.varDepth.value() / 2,
+      bottom: this.position['_y'].value() + this._height.value() / 2,
+      top: this.position['_y'].value() - this._height.value() / 2,
+      right: this.position['_x'].value() + this._width.value() / 2,
+      left: this.position['_x'].value() - this._width.value() / 2,
+      front: this.position['_z'].value() + this._depth.value() / 2,
+      back: this.position['_z'].value() - this._depth.value() / 2,
     };
   }
 }

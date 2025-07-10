@@ -1,37 +1,67 @@
 import { type Geometry } from 'src/geometries/geometry';
 
-export interface GeometryConstraints {
-  setRightOf(target: Geometry): void;
+export abstract class GeometryConstraints {
+  setRightOf(target: Geometry): void {
+    throw new Error('Unsupported geometry');
+  }
 
-  setLeftOf(target: Geometry): void;
+  setLeftOf(target: Geometry): void {
+    throw new Error('Unsupported geometry');
+  }
 
-  setAbove(target: Geometry): void;
+  setAbove(target: Geometry): void {
+    throw new Error('Unsupported geometry');
+  }
 
-  setBelow(target: Geometry): void;
+  setBelow(target: Geometry): void {
+    throw new Error('Unsupported geometry');
+  }
 
-  alignTopEdges(target: Geometry): void;
+  alignTopEdges(target: Geometry): void {
+    throw new Error('Unsupported geometry');
+  }
 
-  alignRightEdges(target: Geometry): void;
+  alignRightEdges(target: Geometry): void {
+    throw new Error('Unsupported geometry');
+  }
 
-  alignBottomEdges(target: Geometry): void;
+  alignBottomEdges(target: Geometry): void {
+    throw new Error('Unsupported geometry');
+  }
 
-  alignLeftEdges(target: Geometry): void;
+  alignLeftEdges(target: Geometry): void {
+    throw new Error('Unsupported geometry');
+  }
 
-  alignHorizontalEdges(target: Geometry): void;
+  alignHorizontalEdges(target: Geometry): void {
+    throw new Error('Unsupported geometry');
+  }
 
-  alignVerticalEdges(target: Geometry): void;
+  alignVerticalEdges(target: Geometry): void {
+    throw new Error('Unsupported geometry');
+  }
 
-  alignVerticalEdges(target: Geometry): void;
+  matchWidth(target: Geometry): void {
+    throw new Error('Unsupported geometry');
+  }
 
-  matchWidth(target: Geometry): void;
+  matchHeight(target: Geometry): void {
+    throw new Error('Unsupported geometry');
+  }
 
-  matchHeight(target: Geometry): void;
+  setMaxWidth(size: number): void {
+    throw new Error('Unsupported geometry');
+  }
 
-  setMaxWidth(size: number): void;
+  setMinWidth(size: number): void {
+    throw new Error('Unsupported geometry');
+  }
 
-  setMinWidth(size: number): void;
+  setMaxHeight(size: number): void {
+    throw new Error('Unsupported geometry');
+  }
 
-  setMaxHeight(size: number): void;
-
-  setMinHeight(size: number): void;
+  setMinHeight(size: number): void {
+    throw new Error('Unsupported geometry');
+  }
 }

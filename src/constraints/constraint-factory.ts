@@ -1,22 +1,15 @@
-import type { Solver } from '@lume/kiwi';
 import type { Geometry } from 'src/geometries/geometry';
 import type { GeometryConstraints } from 'src/constraints/geometry-constraints';
 import { PlaneConstraints } from 'src/constraints/plane-constraints';
+import { PlaneToPlaneConstraints } from 'src/constraints/plane-to-plane-constraints';
 import { Plane } from 'src/geometries/plane';
 
 export class ConstraintFactory {
-  private readonly _solver: Solver;
-
-  constructor(solver: Solver) {
-    this._solver = solver;
-  }
-
-  getConstraints(a: Geometry, b?: Geometry): GeometryConstraints {
-    if (
-      (a instanceof Plane && b instanceof Plane) ||
-      (!b && a instanceof Plane)
-    ) {
-      return new PlaneConstraints(a, this._solver);
+  static getConstraints(a: Geometry, b?: Geometry): GeometryConstraints {
+    if (a instanceof Plane && b instanceof Plane) {
+      return new PlaneToPlaneConstraints(a);
+    } else if (a instanceof Plane && b === undefined) {
+      return new PlaneConstraints(a);
     } else
       throw new Error(
         `Unsupported geometries: ${a.constructor.name} and ${b?.constructor.name}`

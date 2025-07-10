@@ -1,144 +1,125 @@
-import { Constraint, type Solver } from '@lume/kiwi';
-import { Vector3 } from 'src/share/vector';
+import type { Constraint, Solver } from '@lume/kiwi';
 import { ConstraintFactory } from 'src/constraints/constraint-factory';
+import { ConstraintManager } from 'src/constraints/constraint-manager';
 import type { Bounds, Point } from 'src/share/types';
-import { ConstraintType } from 'src/share/enums';
+import { Vector3 } from 'src/share/vector';
 
 export abstract class Geometry {
-  private readonly _constraintFactory: ConstraintFactory;
   protected readonly _solver: Solver;
-  protected readonly _constraints: Constraint[] = [];
   public readonly position: Vector3;
 
   protected constructor(solver: Solver) {
     this._solver = solver;
-    this._constraintFactory = new ConstraintFactory(this._solver);
     this.position = new Vector3(solver);
   }
 
-  setLeftOf(target: Geometry): void {
-    const constraints = this._constraintFactory.getConstraints(this, target);
+  solve(): this {
+    this._solver.updateVariables();
+    return this;
+  }
+
+  addTrackedConstraint(constraint: Constraint): void {
+    ConstraintManager.addConstraint(this, constraint, this._solver);
+  }
+
+  dispose(): void {
+    ConstraintManager.removeAllConstraints(this, this._solver);
+  }
+
+  setLeftOf(target: Geometry): this {
+    const constraints = ConstraintFactory.getConstraints(this, target);
     constraints.setLeftOf(target);
+    return this;
   }
 
-  setRightOf(target: Geometry): void {
-    const constraints = this._constraintFactory.getConstraints(this, target);
+  setRightOf(target: Geometry): this {
+    const constraints = ConstraintFactory.getConstraints(this, target);
     constraints.setRightOf(target);
+    return this;
   }
 
-  setAbove(target: Geometry): void {
-    const constraints = this._constraintFactory.getConstraints(this, target);
+  setAbove(target: Geometry): this {
+    const constraints = ConstraintFactory.getConstraints(this, target);
     constraints.setAbove(target);
+    return this;
   }
 
-  setBelow(target: Geometry): void {
-    const constraints = this._constraintFactory.getConstraints(this, target);
+  setBelow(target: Geometry): this {
+    const constraints = ConstraintFactory.getConstraints(this, target);
     constraints.setBelow(target);
+    return this;
   }
 
-  alignTopEdges(target: Geometry): void {
-    const constraints = this._constraintFactory.getConstraints(this, target);
+  alignTopEdges(target: Geometry): this {
+    const constraints = ConstraintFactory.getConstraints(this, target);
     constraints.alignTopEdges(target);
+    return this;
   }
 
-  alignRightEdges(target: Geometry): void {
-    const constraints = this._constraintFactory.getConstraints(this, target);
+  alignRightEdges(target: Geometry): this {
+    const constraints = ConstraintFactory.getConstraints(this, target);
     constraints.alignRightEdges(target);
+    return this;
   }
 
-  alignBottomEdges(target: Geometry): void {
-    const constraints = this._constraintFactory.getConstraints(this, target);
+  alignBottomEdges(target: Geometry): this {
+    const constraints = ConstraintFactory.getConstraints(this, target);
     constraints.alignBottomEdges(target);
+    return this;
   }
 
-  alignLeftEdges(target: Geometry): void {
-    const constraints = this._constraintFactory.getConstraints(this, target);
+  alignLeftEdges(target: Geometry): this {
+    const constraints = ConstraintFactory.getConstraints(this, target);
     constraints.alignLeftEdges(target);
+    return this;
   }
 
-  alignHorizontalEdges(target: Geometry) {
-    const constraints = this._constraintFactory.getConstraints(this, target);
+  alignHorizontalEdges(target: Geometry): this {
+    const constraints = ConstraintFactory.getConstraints(this, target);
     constraints.alignHorizontalEdges(target);
+    return this;
   }
 
-  matchWidth(target: Geometry): void {
-    const constraints = this._constraintFactory.getConstraints(this, target);
+  matchWidth(target: Geometry): this {
+    const constraints = ConstraintFactory.getConstraints(this, target);
     constraints.matchWidth(target);
+    return this;
   }
 
-  alignVerticalEdges(target: Geometry) {
-    const constraints = this._constraintFactory.getConstraints(this, target);
+  alignVerticalEdges(target: Geometry): this {
+    const constraints = ConstraintFactory.getConstraints(this, target);
     constraints.alignVerticalEdges(target);
+    return this;
   }
 
-  matchHeight(target: Geometry) {
-    const constraints = this._constraintFactory.getConstraints(this, target);
+  matchHeight(target: Geometry): this {
+    const constraints = ConstraintFactory.getConstraints(this, target);
     constraints.matchHeight(target);
+    return this;
   }
 
-  setMaxWidth(size: number) {
-    const constraints = this._constraintFactory.getConstraints(this);
+  setMaxWidth(size: number): this {
+    const constraints = ConstraintFactory.getConstraints(this);
     constraints.setMaxWidth(size);
+    return this;
   }
 
-  setMinWidth(size: number) {
-    const constraints = this._constraintFactory.getConstraints(this);
+  setMinWidth(size: number): this {
+    const constraints = ConstraintFactory.getConstraints(this);
     constraints.setMinWidth(size);
+    return this;
   }
 
-  setMaxHeight(size: number) {
-    const constraints = this._constraintFactory.getConstraints(this);
+  setMaxHeight(size: number): this {
+    const constraints = ConstraintFactory.getConstraints(this);
     constraints.setMaxHeight(size);
+    return this;
   }
 
-  setMinHeight(size: number) {
-    const constraints = this._constraintFactory.getConstraints(this);
+  setMinHeight(size: number): this {
+    const constraints = ConstraintFactory.getConstraints(this);
     constraints.setMinHeight(size);
-  }
-
-  attachTo(target: Geometry, constraintType: ConstraintType): void {
-    const constraints = this._constraintFactory.getConstraints(this, target);
-
-    switch (constraintType) {
-      case ConstraintType.TANGENT_TOP:
-        constraints.setAbove(target);
-        break;
-      case ConstraintType.TANGENT_RIGHT:
-        constraints.setRightOf(target);
-        break;
-      case ConstraintType.TANGENT_BOTTOM:
-        constraints.setBelow(target);
-        break;
-      case ConstraintType.TANGENT_LEFT:
-        constraints.setLeftOf(target);
-        break;
-      case ConstraintType.TANGENT_FRONT:
-        break;
-      case ConstraintType.TANGENT_BACK:
-        break;
-      case ConstraintType.ALIGN_TOP:
-        constraints.alignTopEdges(target);
-        break;
-      case ConstraintType.ALIGN_RIGHT:
-        constraints.alignRightEdges(target);
-        break;
-      case ConstraintType.ALIGN_BOTTOM:
-        constraints.alignBottomEdges(target);
-        break;
-      case ConstraintType.ALIGN_LEFT:
-        constraints.alignLeftEdges(target);
-        break;
-      case ConstraintType.ALIGN_FRONT:
-        break;
-      case ConstraintType.ALIGN_BACK:
-        break;
-      case ConstraintType.ALIGN_HORIZONTAL:
-        constraints.alignHorizontalEdges(target);
-        break;
-      case ConstraintType.ALIGN_VERTICAL:
-        constraints.alignVerticalEdges(target);
-        break;
-    }
+    return this;
   }
 
   abstract drag(to: Point): void;
